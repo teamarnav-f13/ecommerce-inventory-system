@@ -10,14 +10,10 @@ import {
   LogOut 
 } from 'lucide-react';
 
-// Import pages
-import ProductCatalog from './pages/ProductCatalog';
 import Dashboard from './pages/Dashboard';
-// import Inventory from './pages/Inventory';
-// import LowStockAlerts from './pages/LowStockAlerts';
-// import VendorProfile from './pages/VendorProfile';
+import ProductCatalog from './pages/ProductCatalog';
+import CreateProduct from './pages/CreateProduct';
 
-// Import styles
 import './DashboardStyles.css';
 
 function App() {
@@ -36,25 +32,17 @@ function App() {
               </p>
             </div>
           );
-        },
-        Footer() {
-          return (
-            <div style={{ textAlign: 'center', padding: '16px', fontSize: '14px', color: '#6b7280' }}>
-              <p>By signing in, you agree to our Terms of Service and Privacy Policy</p>
-            </div>
-          );
         }
       }}
     >
       {({ signOut, user }) => (
         <Router>
           <div className="app-container">
-            {/* Header */}
             <header className="app-header">
               <div className="header-content">
                 <NavLink to="/dashboard" className="logo">
                   <Package size={32} />
-                  <span>ShopSmart Inventory Management System</span>
+                  <span>ShopSmart Inventory</span>
                 </NavLink>
                 
                 <div className="header-user">
@@ -70,7 +58,6 @@ function App() {
               </div>
             </header>
 
-            {/* Navigation */}
             <nav className="app-nav">
               <div className="nav-content">
                 <NavLink to="/dashboard" className="nav-link">
@@ -96,12 +83,12 @@ function App() {
               </div>
             </nav>
 
-            {/* Main Content */}
             <main className="main-content">
               <Routes>
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/catalog" element={<ProductCatalog />} />
+                <Route path="/catalog/new" element={<CreateProduct />} />
                 <Route 
                   path="/inventory" 
                   element={
@@ -118,8 +105,8 @@ function App() {
                       <h2>Low Stock Alerts</h2>
                       <p>Coming soon...</p>
                     </div>
-                   } 
-                 />
+                  } 
+                />
                 <Route 
                   path="/profile" 
                   element={
@@ -127,8 +114,8 @@ function App() {
                       <h2>Vendor Profile</h2>
                       <p>Coming soon...</p>
                     </div>
-                    } 
-                  />
+                  } 
+                />
               </Routes>
             </main>
           </div>
