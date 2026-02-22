@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Upload, X, Image as ImageIcon } from 'lucide-react';
-import { productAPI, getCurrentVendorId } from 'frontend/src/services/API.js';
+import { productAPI, getCurrentVendorId } from 'frontend/src/services/api';
 
 function ImageUploader({ productId, existingImages = [], onImagesUpdated }) {
   const [uploading, setUploading] = useState(false);
