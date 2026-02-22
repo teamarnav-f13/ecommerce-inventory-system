@@ -22,6 +22,7 @@ function Dashboard() {
     loading: true
   });
   const [searchQuery, setSearchQuery] = useState('');
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     loadDashboardStats();
@@ -30,16 +31,14 @@ function Dashboard() {
   const loadDashboardStats = async () => {
     try {
       setStats(prev => ({ ...prev, loading: true }));
+      setError(null);
       
+      console.log('🔄 Loading dashboard stats...');
       const vendorId = await getCurrentVendorId();
-      if (!vendorId) {
-        console.error('No vendor ID found');
-        setStats(prev => ({ ...prev, loading: false }));
-        return;
-      }
+      console.log('👤 Vendor ID:', vendorId);
 
-      // Fetch real stats from API
       const statsData = await inventoryAPI.getVendorStats(vendorId);
+      console.log('✅ Stats loaded:', statsData);
       
       setStats({
         ...statsData,
@@ -47,8 +46,8 @@ function Dashboard() {
       });
       
     } catch (error) {
-      console.error('Error loading dashboard stats:', error);
-      // Fallback to mock data on error
+      console.error('❌ Error loading dashboard stats:', error);
+      setError(error.message);
       setStats({
         totalProducts: 0,
         totalSKUs: 0,
@@ -96,6 +95,17 @@ function Dashboard() {
           <span>Add Product</span>
         </button>
       </div>
+
+      {error && (
+        <div className="error-banner">
+          <AlertTriangle size={20} />
+          <span>Error loading data: {error}</span>
+          <button onClick={loadDashboardStats} className="btn-secondary">
+            <RefreshCw size={16} />
+            Retry
+          </button>
+        </div>
+      )}
 
       <div className="stats-grid">
         <StatCard
