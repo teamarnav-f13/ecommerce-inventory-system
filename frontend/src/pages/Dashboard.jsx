@@ -10,6 +10,7 @@ import {
   RefreshCw,
   Plus
 } from 'lucide-react';
+import { inventoryAPI, getCurrentVendorId } from '../services/api';
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -28,23 +29,33 @@ function Dashboard() {
 
   const loadDashboardStats = async () => {
     try {
-      // TODO: Replace with actual API calls
-      // const vendorId = await getCurrentVendorId();
-      // const data = await inventoryAPI.getVendorStats(vendorId);
+      setStats(prev => ({ ...prev, loading: true }));
       
-      // Mock data for now
-      setTimeout(() => {
-        setStats({
-          totalProducts: 45,
-          totalSKUs: 128,
-          lowStockItems: 12,
-          outOfStock: 3,
-          loading: false
-        });
-      }, 500);
+      const vendorId = await getCurrentVendorId();
+      if (!vendorId) {
+        console.error('No vendor ID found');
+        setStats(prev => ({ ...prev, loading: false }));
+        return;
+      }
+
+      // Fetch real stats from API
+      const statsData = await inventoryAPI.getVendorStats(vendorId);
+      
+      setStats({
+        ...statsData,
+        loading: false
+      });
+      
     } catch (error) {
       console.error('Error loading dashboard stats:', error);
-      setStats(prev => ({ ...prev, loading: false }));
+      // Fallback to mock data on error
+      setStats({
+        totalProducts: 0,
+        totalSKUs: 0,
+        lowStockItems: 0,
+        outOfStock: 0,
+        loading: false
+      });
     }
   };
 
@@ -72,7 +83,6 @@ function Dashboard() {
 
   return (
     <div className="dashboard-page">
-      {/* Header */}
       <div className="dashboard-header">
         <div>
           <h1 className="page-title">Inventory Dashboard</h1>
@@ -87,7 +97,6 @@ function Dashboard() {
         </button>
       </div>
 
-      {/* Stats Grid */}
       <div className="stats-grid">
         <StatCard
           icon={Package}
@@ -123,7 +132,6 @@ function Dashboard() {
         />
       </div>
 
-      {/* Quick Actions */}
       <div className="quick-actions-section">
         <h2 className="section-title">Quick Actions</h2>
         
@@ -174,7 +182,6 @@ function Dashboard() {
         </div>
       </div>
 
-      {/* Quick Stock Checker */}
       <div className="quick-search-section">
         <h2 className="section-title">Quick Stock Checker</h2>
         <p className="section-subtitle">Search by Product ID or Name</p>
