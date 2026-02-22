@@ -1,7 +1,8 @@
-// API service file
 import { fetchAuthSession } from 'aws-amplify/auth';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://YOUR-API-ID.execute-api.ap-south-1.amazonaws.com/prod';
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
+console.log('🔗 API Base URL:', API_BASE_URL);
 
 async function apiRequest(endpoint, options = {}) {
   try {
@@ -11,24 +12,26 @@ async function apiRequest(endpoint, options = {}) {
     const config = {
       ...options,
       headers: {
-        'Authorization': token || '',
         'Content-Type': 'application/json',
+        ...(token && { 'Authorization': `Bearer ${token}` }),
         ...options.headers
       }
     };
 
-    console.log(`🔗 API Request: ${API_BASE_URL}${endpoint}`);
+    const url = `${API_BASE_URL}${endpoint}`;
+    console.log(`📤 API Request: ${options.method || 'GET'} ${url}`);
 
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
+    const response = await fetch(url, config);
+    
+    const responseText = await response.text();
+    console.log(`📥 API Response Status: ${response.status}`);
+    console.log(`📥 API Response Body:`, responseText);
 
     if (!response.ok) {
-      const errorText = await response.text();
-      console.error(`❌ API Error ${response.status}:`, errorText);
-      throw new Error(`API Error: ${response.status} - ${errorText}`);
+      throw new Error(`API Error ${response.status}: ${responseText}`);
     }
 
-    const data = await response.json();
-    console.log('✅ API Response:', data);
+    const data = responseText ? JSON.parse(responseText) : {};
     return data;
   } catch (error) {
     console.error('❌ API Request failed:', error);
@@ -39,11 +42,12 @@ async function apiRequest(endpoint, options = {}) {
 export async function getCurrentVendorId() {
   try {
     const session = await fetchAuthSession();
-    return session.tokens?.idToken?.payload['custom:vendor_id'] || 
-           session.tokens?.idToken?.payload?.sub;
+    const userSub = session.tokens?.idToken?.payload?.sub;
+    console.log('👤 Current User Sub:', userSub);
+    return userSub || 'VENDOR-001';
   } catch (error) {
     console.error('Error getting vendor ID:', error);
-    return null;
+    return 'VENDOR-001';
   }
 }
 
@@ -96,7 +100,6 @@ export const productAPI = {
     return apiRequest(`/products/${productId}/skus`);
   },
 
-  // ⭐ NEW: Image upload methods
   uploadImage: async (productId, imageFile, vendorId) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -162,14 +165,22 @@ export const inventoryAPI = {
 
   getVendorStats: async (vendorId) => {
     try {
-      const inventoryData = await inventoryAPI.getVendorInventory({ vendor_id: vendorId });
-      const products = await productAPI.listVendorProducts({ vendor_id: vendorId });
-      const lowStock = await inventoryAPI.getLowStockItems(vendorId);
+      console.log('📊 Fetching vendor stats for:', vendorId);
+      
+      const [productsResponse, inventoryResponse, lowStockResponse] = await Promise.all([
+        productAPI.listVendorProducts({ vendor_id: vendorId, limit: 100 }),
+        inventoryAPI.getVendorInventory({ vendor_id: vendorId, limit: 100 }),
+        inventoryAPI.getLowStockItems(vendorId)
+      ]);
 
-      const totalSKUs = inventoryData.inventory?.length || 0;
-      const totalProducts = products.products?.length || 0;
-      const lowStockItems = lowStock.items?.length || 0;
-      const outOfStock = inventoryData.inventory?.filter(item => item.current_stock === 0).length || 0;
+      console.log('Products response:', productsResponse);
+      console.log('Inventory response:', inventoryResponse);
+      console.log('Low stock response:', lowStockResponse);
+
+      const totalProducts = productsResponse?.products?.length || 0;
+      const totalSKUs = inventoryResponse?.inventory?.length || 0;
+      const lowStockItems = lowStockResponse?.items?.length || 0;
+      const outOfStock = inventoryResponse?.inventory?.filter(item => item.current_stock === 0).length || 0;
 
       return {
         totalProducts,
