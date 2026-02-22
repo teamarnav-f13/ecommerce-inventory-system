@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Save } from 'lucide-react';
 import { productAPI, getCurrentVendorId } from '../services/api';
-import ImageUploader from '../components/ImageUploader';
+import ImageUploader from '../components/common/ImageUploader';
 
 function CreateProduct() {
   const navigate = useNavigate();
