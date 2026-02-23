@@ -29,34 +29,31 @@ function Dashboard() {
   }, []);
 
   const loadDashboardStats = async () => {
-    try {
-      setStats(prev => ({ ...prev, loading: true }));
-      setError(null);
-      
-      console.log('🔄 Loading dashboard stats...');
-      const vendorId = await getCurrentVendorId();
-      console.log('👤 Vendor ID:', vendorId);
+  try {
+    setStats(prev => ({ ...prev, loading: true }));
+    setError(null);
 
-      const statsData = await inventoryAPI.getVendorStats(vendorId);
-      console.log('✅ Stats loaded:', statsData);
-      
-      setStats({
-        ...statsData,
-        loading: false
-      });
-      
-    } catch (error) {
-      console.error('❌ Error loading dashboard stats:', error);
-      setError(error.message);
-      setStats({
-        totalProducts: 0,
-        totalSKUs: 0,
-        lowStockItems: 0,
-        outOfStock: 0,
-        loading: false
-      });
-    }
-  };
+    const vendorId = await getCurrentVendorId();
+    const statsData = await inventoryAPI.getVendorStats(vendorId);
+
+    setStats({
+      ...statsData,
+      loading: false
+    });
+
+  } catch (error) {
+    console.error('Dashboard stats load failed:', error.message);
+    
+    setError('Failed to load dashboard data');
+    setStats({
+      totalProducts: 0,
+      totalSKUs: 0,
+      lowStockItems: 0,
+      outOfStock: 0,
+      loading: false
+    });
+  }
+};
 
   const handleQuickSearch = (e) => {
     e.preventDefault();
