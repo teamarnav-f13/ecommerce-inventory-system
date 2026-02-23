@@ -24,11 +24,11 @@ function ProductCatalog() {
 
       const response = await productAPI.listVendorProducts({
         vendor_id: vendorId,
-        is_active: true
       });
-      
+      let items = response.products || [];
+      items = items.filter(p => p.is_active === "true");
       console.log('✅ Products loaded:', response);
-      setProducts(response.products || []);
+      setProducts(items);
       
     } catch (error) {
       console.error('❌ Error loading products:', error);
