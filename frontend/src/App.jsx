@@ -13,6 +13,9 @@ import {
 import Dashboard from './pages/Dashboard';
 import ProductCatalog from './pages/ProductCatalog';
 import CreateProduct from './pages/CreateProduct';
+import InventoryOverview from './pages/InventoryOverview';
+import LowStockAlerts from './pages/LowStockAlerts';
+import VendorProfile from './pages/VendorProfile';
 
 import './DashboardStyles.css';
 
@@ -89,6 +92,9 @@ function App() {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/catalog" element={<ProductCatalog />} />
                 <Route path="/catalog/new" element={<CreateProduct />} />
+                <Route path="/inventory" element={<InventoryOverview />} />
+                <Route path="/alerts" element={<LowStockAlerts />} />
+                <Route path="/profile" element={<VendorProfile />} />
                 <Route 
                   path="/inventory" 
                   element={
