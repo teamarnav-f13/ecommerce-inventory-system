@@ -15,10 +15,10 @@ Amplify.configure({
   }
 });
 
-console.log('🚀 Inventory Dashboard Starting...');
-console.log('📍 Environment:', import.meta.env.MODE);
-console.log('🔗 API URL:', import.meta.env.VITE_API_URL);
-console.log('🔓 Mock Auth:', import.meta.env.VITE_MOCK_AUTH);
+// Only log in development
+if (import.meta.env.MODE === 'development') {
+  console.log('🚀 Inventory Dashboard Started (Development Mode)');
+}
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
