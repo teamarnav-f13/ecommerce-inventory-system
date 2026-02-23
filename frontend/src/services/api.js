@@ -206,6 +206,44 @@ export const inventoryAPI = {
     return apiRequest(
       `/inventory/${productId}/skus/${sku}/history?${queryString}`
     );
+  },
+
+  /* ============================================
+     VENDOR DASHBOARD STATS (RESTORED)
+  ============================================ */
+
+  getVendorStats: async (vendorId) => {
+    try {
+      const [productsResponse, inventoryResponse, lowStockResponse] =
+        await Promise.all([
+          productAPI.listVendorProducts({ vendor_id: vendorId, limit: 100 }),
+          inventoryAPI.getVendorInventory({ vendor_id: vendorId, limit: 100 }),
+          inventoryAPI.getLowStockItems(vendorId)
+        ]);
+
+      const totalProducts = productsResponse?.products?.length || 0;
+      const totalSKUs = inventoryResponse?.inventory?.length || 0;
+      const lowStockItems = lowStockResponse?.items?.length || 0;
+      const outOfStock =
+        inventoryResponse?.inventory?.filter(
+          (item) => item.current_stock === 0
+        ).length || 0;
+
+      return {
+        totalProducts,
+        totalSKUs,
+        lowStockItems,
+        outOfStock
+      };
+    } catch (error) {
+      console.error('Error fetching vendor stats:', error);
+      return {
+        totalProducts: 0,
+        totalSKUs: 0,
+        lowStockItems: 0,
+        outOfStock: 0
+      };
+    }
   }
 };
 
