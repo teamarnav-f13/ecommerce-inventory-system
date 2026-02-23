@@ -16,6 +16,7 @@ import CreateProduct from './pages/CreateProduct';
 import InventoryOverview from './pages/InventoryOverview';
 import LowStockAlerts from './pages/LowStockAlerts';
 import VendorProfile from './pages/VendorProfile';
+import ManageSKUs from './pages/ManageSKUs';
 
 import './DashboardStyles.css';
 
@@ -95,6 +96,7 @@ function App() {
                 <Route path="/inventory" element={<InventoryOverview />} />
                 <Route path="/alerts" element={<LowStockAlerts />} />
                 <Route path="/profile" element={<VendorProfile />} />
+                <Route path="/catalog/:productId/skus" element={<ManageSKUs />} />
                 <Route 
                   path="/inventory" 
                   element={
