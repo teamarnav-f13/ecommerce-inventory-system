@@ -13,7 +13,7 @@ function InventoryOverview() {
 
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [adjustment, setAdjustment] = useState(0);
+  const [adjustment, setAdjustment] = useState("");
 
   useEffect(() => {
     loadInventory();
@@ -58,10 +58,7 @@ function InventoryOverview() {
       await inventoryAPI.adjustStock(
         selectedItem.product_id,
         selectedItem.sku,
-        {
-          adjustment: Number(adjustment),
-          reason: "Manual stock update"
-        }
+        Number(adjustment)
       );
 
       alert("Stock updated successfully");
