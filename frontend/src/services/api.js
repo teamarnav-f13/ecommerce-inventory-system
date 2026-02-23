@@ -1,8 +1,14 @@
 import { fetchAuthSession } from 'aws-amplify/auth';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://tdozbknrj8.execute-api.ap-south-1.amazonaws.com/prod';
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL ||
+  'https://tdozbknrj8.execute-api.ap-south-1.amazonaws.com/prod';
 
 console.log('🔗 API Base URL:', API_BASE_URL);
+
+/* ============================================
+   CORE REQUEST HANDLER
+============================================ */
 
 async function apiRequest(endpoint, options = {}) {
   try {
@@ -13,7 +19,7 @@ async function apiRequest(endpoint, options = {}) {
       ...options,
       headers: {
         'Content-Type': 'application/json',
-        ...(token && { 'Authorization': `Bearer ${token}` }),
+        ...(token && { Authorization: `Bearer ${token}` }),
         ...options.headers
       }
     };
@@ -22,8 +28,8 @@ async function apiRequest(endpoint, options = {}) {
     console.log(`📤 API Request: ${options.method || 'GET'} ${url}`);
 
     const response = await fetch(url, config);
-    
     const responseText = await response.text();
+
     console.log(`📥 API Response Status: ${response.status}`);
     console.log(`📥 API Response Body:`, responseText);
 
@@ -31,230 +37,215 @@ async function apiRequest(endpoint, options = {}) {
       throw new Error(`API Error ${response.status}: ${responseText}`);
     }
 
-    const data = responseText ? JSON.parse(responseText) : {};
-    return data;
+    return responseText ? JSON.parse(responseText) : {};
   } catch (error) {
     console.error('❌ API Request failed:', error);
     throw error;
   }
 }
 
+/* ============================================
+   AUTH HELPERS
+============================================ */
+
 export async function getCurrentVendorId() {
   try {
     const session = await fetchAuthSession();
     const userSub = session.tokens?.idToken?.payload?.sub;
     console.log('👤 Current User Sub:', userSub);
-    return userSub || 'VENDOR-001';
+    return userSub;
   } catch (error) {
     console.error('Error getting vendor ID:', error);
-    return 'VENDOR-001';
+    throw error;
   }
 }
 
+/* ============================================
+   PRODUCT APIs
+============================================ */
+
 export const productAPI = {
-  createProduct: async (productData) => {
-    return apiRequest('/products', {
+  createProduct: (productData) =>
+    apiRequest('/products', {
       method: 'POST',
       body: JSON.stringify(productData)
-    });
-  },
+    }),
 
-  getProduct: async (productId) => {
-    return apiRequest(`/products/${productId}`);
-  },
+  getProduct: (productId) =>
+    apiRequest(`/products/${productId}`),
 
-  updateProduct: async (productId, productData) => {
-    return apiRequest(`/products/${productId}`, {
+  updateProduct: (productId, productData) =>
+    apiRequest(`/products/${productId}`, {
       method: 'PUT',
       body: JSON.stringify(productData)
-    });
-  },
+    }),
 
-  deleteProduct: async (productId, vendorId) => {
+  deleteProduct: async (productId) => {
+    const vendorId = await getCurrentVendorId();
     return apiRequest(`/products/${productId}`, {
       method: 'DELETE',
       body: JSON.stringify({ vendor_id: vendorId })
     });
   },
 
-  listVendorProducts: async (params = {}) => {
+  listVendorProducts: (params = {}) => {
     const queryString = new URLSearchParams(params).toString();
     return apiRequest(`/products?${queryString}`);
   },
 
-  createSKU: async (productId, skuData) => {
-    return apiRequest(`/products/${productId}/skus`, {
+  createSKU: (productId, skuData) =>
+    apiRequest(`/products/${productId}/skus`, {
       method: 'POST',
       body: JSON.stringify(skuData)
-    });
-  },
+    }),
 
-  updateSKU: async (productId, sku, skuData) => {
-    return apiRequest(`/products/${productId}/skus/${sku}`, {
+  updateSKU: (productId, sku, skuData) =>
+    apiRequest(`/products/${productId}/skus/${sku}`, {
       method: 'PUT',
       body: JSON.stringify(skuData)
-    });
-  },
+    }),
 
-  listProductSKUs: async (productId) => {
-    return apiRequest(`/products/${productId}/skus`);
-  },
+  listProductSKUs: (productId) =>
+    apiRequest(`/products/${productId}/skus`),
 
-  uploadImage: async (productId, imageFile, vendorId) => {
+  /* ==============================
+     IMAGE UPLOAD
+  ============================== */
+
+  uploadImage: async (productId, imageFile) => {
+    const vendorId = await getCurrentVendorId();
+
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-      
+
       reader.onload = async () => {
         try {
           const base64Image = reader.result.split(',')[1];
-          
-          const response = await apiRequest(`/products/${productId}/images/upload`, {
-            method: 'POST',
-            body: JSON.stringify({
-              vendor_id: vendorId,
-              image_data: base64Image,
-              image_name: imageFile.name,
-              content_type: imageFile.type
-            })
-          });
-          
+
+          const response = await apiRequest(
+            `/products/${productId}/images/upload`,
+            {
+              method: 'POST',
+              body: JSON.stringify({
+                vendor_id: vendorId,
+                image_data: base64Image,
+                image_name: imageFile.name,
+                content_type: imageFile.type
+              })
+            }
+          );
+
           resolve(response);
         } catch (error) {
           reject(error);
         }
       };
-      
-      reader.onerror = () => reject(new Error('Failed to read file'));
+
+      reader.onerror = () =>
+        reject(new Error('Failed to read file'));
+
       reader.readAsDataURL(imageFile);
     });
   },
 
-  uploadMultipleImages: async (productId, imageFiles, vendorId) => {
-    const uploadPromises = Array.from(imageFiles).map(file => 
-      productAPI.uploadImage(productId, file, vendorId)
+  uploadMultipleImages: async (productId, imageFiles) => {
+    const uploads = Array.from(imageFiles).map((file) =>
+      productAPI.uploadImage(productId, file)
     );
-    return Promise.all(uploadPromises);
+    return Promise.all(uploads);
   }
 };
 
-export const inventoryAPI = {
-  getInventory: async (productId, sku) => {
-    return apiRequest(`/inventory/${productId}/skus/${sku}`);
-  },
+/* ============================================
+   INVENTORY APIs
+============================================ */
 
-  getVendorInventory: async (params = {}) => {
+export const inventoryAPI = {
+  getInventory: (productId, sku) =>
+    apiRequest(`/inventory/${productId}/skus/${sku}`),
+
+  getVendorInventory: (params = {}) => {
     const queryString = new URLSearchParams(params).toString();
     return apiRequest(`/inventory?${queryString}`);
   },
 
-  getLowStockItems: async (vendorId) => {
-    return apiRequest(`/inventory/low-stock?vendor_id=${vendorId}`);
-  },
+  getLowStockItems: (vendorId) =>
+    apiRequest(`/inventory/low-stock?vendor_id=${vendorId}`),
 
-  adjustStock: async (productId, sku, adjustmentData) => {
-    return apiRequest(`/inventory/${productId}/skus/${sku}/adjust`, {
-      method: 'POST',
-      body: JSON.stringify(adjustmentData)
-    });
-  },
+  /* ============================================
+     UPDATED STOCK ADJUSTMENT (FIXED)
+  ============================================ */
 
-  getStockHistory: async (productId, sku, params = {}) => {
-    const queryString = new URLSearchParams(params).toString();
-    return apiRequest(`/inventory/${productId}/skus/${sku}/history?${queryString}`);
-  },
+  adjustStock: async (productId, sku, quantityChange) => {
+    const vendorId = await getCurrentVendorId();
 
-  getVendorStats: async (vendorId) => {
-    try {
-      console.log('📊 Fetching vendor stats for:', vendorId);
-      
-      const [productsResponse, inventoryResponse, lowStockResponse] = await Promise.all([
-        productAPI.listVendorProducts({ vendor_id: vendorId, limit: 100 }),
-        inventoryAPI.getVendorInventory({ vendor_id: vendorId, limit: 100 }),
-        inventoryAPI.getLowStockItems(vendorId)
-      ]);
+    const change = Number(quantityChange);
 
-      console.log('Products response:', productsResponse);
-      console.log('Inventory response:', inventoryResponse);
-      console.log('Low stock response:', lowStockResponse);
-
-      const totalProducts = productsResponse?.products?.length || 0;
-      const totalSKUs = inventoryResponse?.inventory?.length || 0;
-      const lowStockItems = lowStockResponse?.items?.length || 0;
-      const outOfStock = inventoryResponse?.inventory?.filter(item => item.current_stock === 0).length || 0;
-
-      return {
-        totalProducts,
-        totalSKUs,
-        lowStockItems,
-        outOfStock
-      };
-    } catch (error) {
-      console.error('Error fetching vendor stats:', error);
-      return {
-        totalProducts: 0,
-        totalSKUs: 0,
-        lowStockItems: 0,
-        outOfStock: 0
-      };
+    if (isNaN(change) || change === 0) {
+      throw new Error('Quantity change must be a non-zero number');
     }
+
+    const transactionType =
+      change > 0 ? 'STOCK_IN' : 'STOCK_OUT';
+
+    return apiRequest(
+      `/inventory/${productId}/skus/${sku}/adjust`,
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          vendor_id: vendorId,
+          quantity_change: change,
+          transaction_type: transactionType
+        })
+      }
+    );
+  },
+
+  getStockHistory: (productId, sku, params = {}) => {
+    const queryString = new URLSearchParams(params).toString();
+    return apiRequest(
+      `/inventory/${productId}/skus/${sku}/history?${queryString}`
+    );
   }
 };
+
+/* ============================================
+   ORDER APIs
+============================================ */
 
 export const orderAPI = {
-  processOrderPlaced: async (orderData) => {
-    return apiRequest('/orders/placed', {
+  processOrderPlaced: (orderData) =>
+    apiRequest('/orders/placed', {
       method: 'POST',
       body: JSON.stringify(orderData)
-    });
-  },
+    }),
 
-  processOrderConfirmed: async (orderData) => {
-    return apiRequest('/orders/confirmed', {
+  processOrderConfirmed: (orderData) =>
+    apiRequest('/orders/confirmed', {
       method: 'POST',
       body: JSON.stringify(orderData)
-    });
-  },
+    }),
 
-  processOrderCancelled: async (orderData) => {
-    return apiRequest('/orders/cancelled', {
+  processOrderCancelled: (orderData) =>
+    apiRequest('/orders/cancelled', {
       method: 'POST',
       body: JSON.stringify(orderData)
-    });
-  },
+    }),
 
-  processRefund: async (refundData) => {
-    return apiRequest('/orders/refunded', {
+  processRefund: (refundData) =>
+    apiRequest('/orders/refunded', {
       method: 'POST',
       body: JSON.stringify(refundData)
-    });
-  }
+    })
 };
 
-export const transactionAPI = {
-  getHistory: async (params = {}) => {
-    const queryString = new URLSearchParams(params).toString();
-    return apiRequest(`/transactions?${queryString}`);
-  }
-};
-
-export const vendorAPI = {
-  getProfile: async () => {
-    return apiRequest('/vendor/profile');
-  },
-
-  updateProfile: async (profileData) => {
-    return apiRequest('/vendor/profile', {
-      method: 'PUT',
-      body: JSON.stringify(profileData)
-    });
-  }
-};
+/* ============================================
+   EXPORT DEFAULT
+============================================ */
 
 export default {
   productAPI,
   inventoryAPI,
   orderAPI,
-  transactionAPI,
-  vendorAPI,
   getCurrentVendorId
 };
