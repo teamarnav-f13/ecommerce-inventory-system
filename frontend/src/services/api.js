@@ -93,11 +93,25 @@ export const productAPI = {
     return apiRequest(`/products?${queryString}`);
   },
 
-  createSKU: (productId, skuData) =>
-    apiRequest(`/products/${productId}/skus`, {
+  /* ==============================
+     SKU MANAGEMENT
+  ============================== */
+
+  createSKU: async (productId, skuData) => {
+    return apiRequest(`/products/${productId}/skus`, {
       method: 'POST',
       body: JSON.stringify(skuData)
-    }),
+    });
+  },
+
+  createMultipleSKUs: async (productId, skus = []) => {
+    const results = [];
+    for (const sku of skus) {
+      const res = await productAPI.createSKU(productId, sku);
+      results.push(res);
+    }
+    return results;
+  },
 
   updateSKU: (productId, sku, skuData) =>
     apiRequest(`/products/${productId}/skus/${sku}`, {
