@@ -976,3 +976,111 @@ body {
   font-weight: 600;
   color: var(--gray-900);
 }
+
+/* ============================================
+   INVENTORY STOCK MANAGEMENT (ENHANCED)
+   ============================================ */
+
+.inventory-table th,
+.inventory-table td {
+  padding: var(--spacing-md) var(--spacing-lg);
+  text-align: center;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.inventory-table th {
+  background: var(--gray-50);
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--gray-700);
+}
+
+.inventory-table tbody tr:hover {
+  background: var(--gray-50);
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.status-badge.danger {
+  color: var(--danger);
+}
+
+.status-badge.warning {
+  color: var(--warning);
+}
+
+.status-badge.success {
+  color: var(--success);
+}
+
+/* Edit Button */
+.btn-edit {
+  background: transparent;
+  border: 1px solid var(--gray-300);
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-edit:hover {
+  background: var(--primary-light);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal {
+  background: var(--white);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  width: 380px;
+  box-shadow: var(--shadow-xl);
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.modal h3 {
+  margin-bottom: var(--spacing-sm);
+}
+
+.modal input {
+  width: 100%;
+  padding: var(--spacing-sm);
+  margin: var(--spacing-md) 0;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-md);
+}
+
+.modal input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-sm);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
