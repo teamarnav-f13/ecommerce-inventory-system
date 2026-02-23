@@ -1,29 +1,79 @@
-// Product detail
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Layers, Plus, ArrowLeft } from 'lucide-react';
+import { productAPI, getCurrentVendorId } from '../services/api';
 
 function ProductDetail() {
   const { productId } = useParams();
+  const navigate = useNavigate();
+
+  const [skus, setSkus] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadSKUs();
+  }, []);
+
+  const loadSKUs = async () => {
+    try {
+      setLoading(true);
+      const response = await productAPI.listProductSKUs(productId);
+      setSkus(response.skus || []);
+    } catch (error) {
+      console.error("Error loading SKUs:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <p>Loading SKUs...</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="page">
+    <div className="sku-page">
       <div className="page-header">
-        <h1>Product Detail</h1>
-        <p>View and edit product information</p>
+        <button className="btn-secondary" onClick={() => navigate('/catalog')}>
+          <ArrowLeft size={18} />
+          Back to Catalog
+        </button>
+        <h1>Manage SKUs</h1>
       </div>
-      
-      <div style={{ 
-        padding: '2rem', 
-        background: '#f1f5f9', 
-        borderRadius: '8px',
-        textAlign: 'center' 
-      }}>
-        <p style={{ color: '#64748b' }}>
-          📦 Product detail page coming soon...
-        </p>
-        <p style={{ color: '#94a3b8', fontSize: '0.875rem', marginTop: '0.5rem' }}>
-          Product ID: {productId}
-        </p>
-      </div>
+
+      {skus.length === 0 ? (
+        <div className="empty-state">
+          <Layers size={48} />
+          <h3>No SKUs created yet</h3>
+          <p>Add variants for this product</p>
+        </div>
+      ) : (
+        <div className="products-table">
+          <table>
+            <thead>
+              <tr>
+                <th>SKU</th>
+                <th>Variant</th>
+                <th>Price</th>
+                <th>Stock</th>
+              </tr>
+            </thead>
+            <tbody>
+              {skus.map((sku) => (
+                <tr key={sku.sku}>
+                  <td>{sku.sku}</td>
+                  <td>{sku.variant_name}</td>
+                  <td>${sku.unit_price?.toFixed(2)}</td>
+                  <td>{sku.current_stock}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }
