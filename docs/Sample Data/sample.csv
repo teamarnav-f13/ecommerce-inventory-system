@@ -1,0 +1,111 @@
+TABLE 1: Products-table,,,,,,,,,,,,
+product_id,vendor_id,product_name,description,category,subcategory,brand,base_price,images,tags,is_active,created_at,updated_at
+PROD-00001,VENDOR-001,Wireless Bluetooth Headphones,"Premium over-ear headphones with active noise cancellation, 30-hour battery life",Electronics,Audio,SoundMax,89.99,"[""https://shopsmart-inventory-images.s3.ap-south-1.amazonaws.com/PROD-00001_img1.jpg""]","[""wireless"",""bluetooth"",""audio""]",TRUE,2026-02-20T10:30:00Z,2026-02-20T10:30:00Z
+PROD-00002,VENDOR-001,Gaming Mechanical Keyboard,"RGB backlit mechanical keyboard with blue switches, full-size layout",Electronics,Gaming,TechPro,129.99,"[""https://shopsmart-inventory-images.s3.ap-south-1.amazonaws.com/PROD-00002_img1.jpg""]","[""gaming"",""keyboard"",""mechanical""]",TRUE,2026-02-20T11:00:00Z,2026-02-20T11:00:00Z
+PROD-00003,VENDOR-001,4K Webcam,"Ultra HD 4K webcam with autofocus and built-in microphone",Electronics,Computer Accessories,VisionTech,79.99,"[""https://shopsmart-inventory-images.s3.ap-south-1.amazonaws.com/PROD-00003_img1.jpg""]","[""webcam"",""4k"",""streaming""]",TRUE,2026-02-20T12:00:00Z,2026-02-20T12:00:00Z
+PROD-00004,VENDOR-002,Cotton T-Shirt - Men,"Premium cotton crew neck t-shirt, available in multiple colors",Clothing,Men's Wear,FashionHub,24.99,"[""https://shopsmart-inventory-images.s3.ap-south-1.amazonaws.com/PROD-00004_img1.jpg""]","[""clothing"",""men"",""cotton""]",TRUE,2026-02-20T09:00:00Z,2026-02-20T09:00:00Z
+PROD-00005,VENDOR-002,Denim Jeans - Women,"Classic fit women's denim jeans, stonewash finish",Clothing,Women's Wear,DenimCo,59.99,"[""https://shopsmart-inventory-images.s3.ap-south-1.amazonaws.com/PROD-00005_img1.jpg""]","[""clothing"",""women"",""denim""]",TRUE,2026-02-20T09:30:00Z,2026-02-20T09:30:00Z
+PROD-00006,VENDOR-002,Sports Running Shoes,"Lightweight running shoes with breathable mesh and cushioned sole",Clothing,Footwear,SportFit,89.99,"[""https://shopsmart-inventory-images.s3.ap-south-1.amazonaws.com/PROD-00006_img1.jpg""]","[""shoes"",""sports"",""running""]",TRUE,2026-02-20T10:00:00Z,2026-02-20T10:00:00Z
+PROD-00007,VENDOR-003,Stainless Steel Water Bottle,"Insulated water bottle keeps drinks cold for 24 hours, 750ml capacity",Home & Garden,Kitchen,HomeEssentials,29.99,"[""https://shopsmart-inventory-images.s3.ap-south-1.amazonaws.com/PROD-00007_img1.jpg""]","[""water bottle"",""insulated"",""stainless steel""]",TRUE,2026-02-21T08:00:00Z,2026-02-21T08:00:00Z
+PROD-00008,VENDOR-003,Non-Stick Frying Pan Set,"3-piece non-stick frying pan set with heat-resistant handles",Home & Garden,Kitchen,CookPro,69.99,"[""https://shopsmart-inventory-images.s3.ap-south-1.amazonaws.com/PROD-00008_img1.jpg""]","[""cookware"",""frying pan"",""non-stick""]",TRUE,2026-02-21T09:00:00Z,2026-02-21T09:00:00Z
+PROD-00009,VENDOR-003,LED Desk Lamp,"Adjustable LED desk lamp with touch control and USB charging port",Home & Garden,Lighting,BrightHome,39.99,"[""https://shopsmart-inventory-images.s3.ap-south-1.amazonaws.com/PROD-00009_img1.jpg""]","[""lamp"",""LED"",""desk""]",TRUE,2026-02-21T10:00:00Z,2026-02-21T10:00:00Z
+PROD-00010,VENDOR-004,Yoga Mat with Carrying Strap,"6mm thick non-slip yoga mat with alignment marks",Sports & Outdoors,Fitness,YogaZen,34.99,"[""https://shopsmart-inventory-images.s3.ap-south-1.amazonaws.com/PROD-00010_img1.jpg""]","[""yoga"",""fitness"",""mat""]",TRUE,2026-02-21T11:00:00Z,2026-02-21T11:00:00Z
+PROD-00011,VENDOR-004,Resistance Bands Set,"Set of 5 resistance bands with different resistance levels and carrying bag",Sports & Outdoors,Fitness,FitGear,29.99,"[""https://shopsmart-inventory-images.s3.ap-south-1.amazonaws.com/PROD-00011_img1.jpg""]","[""fitness"",""resistance bands"",""workout""]",TRUE,2026-02-21T12:00:00Z,2026-02-21T12:00:00Z
+PROD-00012,VENDOR-004,Camping Tent 4-Person,"Waterproof 4-person camping tent with easy setup, includes carrying bag",Sports & Outdoors,Camping,OutdoorMax,149.99,"[""https://shopsmart-inventory-images.s3.ap-south-1.amazonaws.com/PROD-00012_img1.jpg""]","[""camping"",""tent"",""outdoor""]",TRUE,2026-02-21T13:00:00Z,2026-02-21T13:00:00Z
+PROD-00013,VENDOR-005,Python Programming Book,"Complete guide to Python programming for beginners and intermediate developers",Books,Technology,TechBooks,44.99,"[""https://shopsmart-inventory-images.s3.ap-south-1.amazonaws.com/PROD-00013_img1.jpg""]","[""books"",""programming"",""python""]",TRUE,2026-02-22T08:00:00Z,2026-02-22T08:00:00Z
+PROD-00014,VENDOR-005,Science Fiction Novel Collection,"Box set of 3 bestselling science fiction novels",Books,Fiction,NovelPress,59.99,"[""https://shopsmart-inventory-images.s3.ap-south-1.amazonaws.com/PROD-00014_img1.jpg""]","[""books"",""fiction"",""sci-fi""]",TRUE,2026-02-22T09:00:00Z,2026-02-22T09:00:00Z
+PROD-00015,VENDOR-005,Children's Educational Book Set,"Set of 10 illustrated educational books for ages 5-8",Books,Children,KidsLearn,39.99,"[""https://shopsmart-inventory-images.s3.ap-south-1.amazonaws.com/PROD-00015_img1.jpg""]","[""books"",""children"",""educational""]",TRUE,2026-02-22T10:00:00Z,2026-02-22T10:00:00Z
+
+TABLE 2: VendorInventory,,,,,,,,,,,
+product_id,sku,vendor_id,variant_name,variant_attributes,current_stock,reserved_stock,available_stock,reorder_threshold,unit_price,last_updated,last_updated_by,is_active
+PROD-00001,SKU-PROD-00001-BLK,VENDOR-001,Black Edition,"{""color"":""Black""}",75,5,70,10,89.99,2026-02-23T14:20:00Z,VENDOR-001,TRUE
+PROD-00001,SKU-PROD-00001-WHT,VENDOR-001,White Edition,"{""color"":""White""}",45,3,42,10,89.99,2026-02-23T14:20:00Z,VENDOR-001,TRUE
+PROD-00001,SKU-PROD-00001-BLU,VENDOR-001,Blue Edition,"{""color"":""Blue""}",8,0,8,10,94.99,2026-02-23T14:20:00Z,VENDOR-001,TRUE
+PROD-00002,SKU-PROD-00002-RGB,VENDOR-001,RGB Backlit,"{""backlight"":""RGB""}",60,8,52,15,129.99,2026-02-23T13:00:00Z,VENDOR-001,TRUE
+PROD-00002,SKU-PROD-00002-WHT,VENDOR-001,White Backlit,"{""backlight"":""White""}",40,2,38,15,124.99,2026-02-23T13:00:00Z,VENDOR-001,TRUE
+PROD-00003,SKU-PROD-00003-STD,VENDOR-001,Standard,"{""type"":""Standard""}",30,1,29,8,79.99,2026-02-23T12:00:00Z,VENDOR-001,TRUE
+PROD-00004,SKU-PROD-00004-RED-S,VENDOR-002,Red - Small,"{""color"":""Red"",""size"":""S""}",100,10,90,20,24.99,2026-02-23T11:00:00Z,VENDOR-002,TRUE
+PROD-00004,SKU-PROD-00004-RED-M,VENDOR-002,Red - Medium,"{""color"":""Red"",""size"":""M""}",120,15,105,20,24.99,2026-02-23T11:00:00Z,VENDOR-002,TRUE
+PROD-00004,SKU-PROD-00004-RED-L,VENDOR-002,Red - Large,"{""color"":""Red"",""size"":""L""}",90,12,78,20,24.99,2026-02-23T11:00:00Z,VENDOR-002,TRUE
+PROD-00004,SKU-PROD-00004-BLU-S,VENDOR-002,Blue - Small,"{""color"":""Blue"",""size"":""S""}",80,5,75,20,24.99,2026-02-23T11:00:00Z,VENDOR-002,TRUE
+PROD-00004,SKU-PROD-00004-BLU-M,VENDOR-002,Blue - Medium,"{""color"":""Blue"",""size"":""M""}",95,8,87,20,24.99,2026-02-23T11:00:00Z,VENDOR-002,TRUE
+PROD-00004,SKU-PROD-00004-BLU-L,VENDOR-002,Blue - Large,"{""color"":""Blue"",""size"":""L""}",70,6,64,20,24.99,2026-02-23T11:00:00Z,VENDOR-002,TRUE
+PROD-00005,SKU-PROD-00005-28,VENDOR-002,Size 28,"{""waist_size"":28}",50,4,46,10,59.99,2026-02-23T10:30:00Z,VENDOR-002,TRUE
+PROD-00005,SKU-PROD-00005-30,VENDOR-002,Size 30,"{""waist_size"":30}",65,6,59,10,59.99,2026-02-23T10:30:00Z,VENDOR-002,TRUE
+PROD-00005,SKU-PROD-00005-32,VENDOR-002,Size 32,"{""waist_size"":32}",55,5,50,10,59.99,2026-02-23T10:30:00Z,VENDOR-002,TRUE
+PROD-00005,SKU-PROD-00005-34,VENDOR-002,Size 34,"{""waist_size"":34}",40,3,37,10,59.99,2026-02-23T10:30:00Z,VENDOR-002,TRUE
+PROD-00006,SKU-PROD-00006-BLK-8,VENDOR-002,Black - Size 8,"{""color"":""Black"",""size"":8}",35,2,33,12,89.99,2026-02-23T10:00:00Z,VENDOR-002,TRUE
+PROD-00006,SKU-PROD-00006-BLK-9,VENDOR-002,Black - Size 9,"{""color"":""Black"",""size"":9}",42,3,39,12,89.99,2026-02-23T10:00:00Z,VENDOR-002,TRUE
+PROD-00006,SKU-PROD-00006-BLK-10,VENDOR-002,Black - Size 10,"{""color"":""Black"",""size"":10}",38,4,34,12,89.99,2026-02-23T10:00:00Z,VENDOR-002,TRUE
+PROD-00006,SKU-PROD-00006-WHT-8,VENDOR-002,White - Size 8,"{""color"":""White"",""size"":8}",30,1,29,12,89.99,2026-02-23T10:00:00Z,VENDOR-002,TRUE
+PROD-00006,SKU-PROD-00006-WHT-9,VENDOR-002,White - Size 9,"{""color"":""White"",""size"":9}",45,5,40,12,89.99,2026-02-23T10:00:00Z,VENDOR-002,TRUE
+PROD-00006,SKU-PROD-00006-WHT-10,VENDOR-002,White - Size 10,"{""color"":""White"",""size"":10}",40,2,38,12,89.99,2026-02-23T10:00:00Z,VENDOR-002,TRUE
+PROD-00007,SKU-PROD-00007-BLK,VENDOR-003,Black,"{""color"":""Black""}",150,10,140,25,29.99,2026-02-23T09:00:00Z,VENDOR-003,TRUE
+PROD-00007,SKU-PROD-00007-BLU,VENDOR-003,Blue,"{""color"":""Blue""}",120,8,112,25,29.99,2026-02-23T09:00:00Z,VENDOR-003,TRUE
+PROD-00007,SKU-PROD-00007-GRN,VENDOR-003,Green,"{""color"":""Green""}",90,5,85,25,29.99,2026-02-23T09:00:00Z,VENDOR-003,TRUE
+PROD-00008,SKU-PROD-00008-SET,VENDOR-003,3-Piece Set,"{""pieces"":3}",45,3,42,10,69.99,2026-02-23T08:30:00Z,VENDOR-003,TRUE
+PROD-00009,SKU-PROD-00009-WHT,VENDOR-003,White,"{""color"":""White""}",70,6,64,15,39.99,2026-02-23T08:00:00Z,VENDOR-003,TRUE
+PROD-00009,SKU-PROD-00009-BLK,VENDOR-003,Black,"{""color"":""Black""}",65,4,61,15,39.99,2026-02-23T08:00:00Z,VENDOR-003,TRUE
+PROD-00010,SKU-PROD-00010-PUR,VENDOR-004,Purple,"{""color"":""Purple""}",80,7,73,20,34.99,2026-02-23T07:30:00Z,VENDOR-004,TRUE
+PROD-00010,SKU-PROD-00010-BLU,VENDOR-004,Blue,"{""color"":""Blue""}",75,5,70,20,34.99,2026-02-23T07:30:00Z,VENDOR-004,TRUE
+PROD-00010,SKU-PROD-00010-GRN,VENDOR-004,Green,"{""color"":""Green""}",6,0,6,20,34.99,2026-02-23T07:30:00Z,VENDOR-004,TRUE
+PROD-00011,SKU-PROD-00011-SET,VENDOR-004,5-Band Set,"{""bands"":5}",95,8,87,15,29.99,2026-02-23T07:00:00Z,VENDOR-004,TRUE
+PROD-00012,SKU-PROD-00012-BLU,VENDOR-004,Blue,"{""color"":""Blue""}",25,2,23,8,149.99,2026-02-23T06:30:00Z,VENDOR-004,TRUE
+PROD-00012,SKU-PROD-00012-GRN,VENDOR-004,Green,"{""color"":""Green""}",30,3,27,8,149.99,2026-02-23T06:30:00Z,VENDOR-004,TRUE
+PROD-00013,SKU-PROD-00013-HRD,VENDOR-005,Hardcover,"{""binding"":""Hardcover""}",50,4,46,10,44.99,2026-02-23T06:00:00Z,VENDOR-005,TRUE
+PROD-00013,SKU-PROD-00013-PPR,VENDOR-005,Paperback,"{""binding"":""Paperback""}",85,7,78,15,34.99,2026-02-23T06:00:00Z,VENDOR-005,TRUE
+PROD-00014,SKU-PROD-00014-BOX,VENDOR-005,Box Set,"{""format"":""Box Set""}",40,3,37,8,59.99,2026-02-23T05:30:00Z,VENDOR-005,TRUE
+PROD-00015,SKU-PROD-00015-SET,VENDOR-005,10-Book Set,"{""books"":10}",60,5,55,12,39.99,2026-02-23T05:00:00Z,VENDOR-005,TRUE
+
+TABLE 3: StockTransactions,,,,,,,,,,
+transaction_id,timestamp,product_id,sku,vendor_id,transaction_type,quantity_change,stock_before,stock_after,order_id,performed_by,notes
+TXN-001,2026-02-20T10:35:00Z,PROD-00001,SKU-PROD-00001-BLK,VENDOR-001,restock,50,25,75,,VENDOR-001,Initial stock replenishment
+TXN-002,2026-02-20T14:20:00Z,PROD-00001,SKU-PROD-00001-BLK,VENDOR-001,order_placed,0,75,75,ORDER-1001,system,Stock reserved for order
+TXN-003,2026-02-20T15:00:00Z,PROD-00001,SKU-PROD-00001-BLK,VENDOR-001,order_confirmed,-5,75,70,ORDER-1001,system,Order confirmed and shipped
+TXN-004,2026-02-20T11:05:00Z,PROD-00001,SKU-PROD-00001-WHT,VENDOR-001,restock,50,0,50,,VENDOR-001,New variant added to inventory
+TXN-005,2026-02-20T16:30:00Z,PROD-00001,SKU-PROD-00001-WHT,VENDOR-001,order_placed,0,50,50,ORDER-1002,system,Stock reserved for order
+TXN-006,2026-02-20T17:00:00Z,PROD-00001,SKU-PROD-00001-WHT,VENDOR-001,order_confirmed,-5,50,45,ORDER-1002,system,Order confirmed and shipped
+TXN-007,2026-02-20T12:10:00Z,PROD-00001,SKU-PROD-00001-BLU,VENDOR-001,restock,10,0,10,,VENDOR-001,Low initial stock for new color
+TXN-008,2026-02-21T09:00:00Z,PROD-00001,SKU-PROD-00001-BLU,VENDOR-001,order_confirmed,-2,10,8,ORDER-1003,system,Order confirmed and shipped
+TXN-009,2026-02-20T11:10:00Z,PROD-00002,SKU-PROD-00002-RGB,VENDOR-001,restock,70,0,70,,VENDOR-001,Initial stock for RGB variant
+TXN-010,2026-02-21T14:00:00Z,PROD-00002,SKU-PROD-00002-RGB,VENDOR-001,order_confirmed,-10,70,60,ORDER-1004,system,Bulk order shipped
+TXN-011,2026-02-20T11:15:00Z,PROD-00002,SKU-PROD-00002-WHT,VENDOR-001,restock,40,0,40,,VENDOR-001,Initial stock for white backlit
+TXN-012,2026-02-20T12:20:00Z,PROD-00003,SKU-PROD-00003-STD,VENDOR-001,restock,30,0,30,,VENDOR-001,Initial webcam stock
+TXN-013,2026-02-20T09:10:00Z,PROD-00004,SKU-PROD-00004-RED-S,VENDOR-002,restock,110,0,110,,VENDOR-002,Initial t-shirt stock - Red Small
+TXN-014,2026-02-21T10:00:00Z,PROD-00004,SKU-PROD-00004-RED-S,VENDOR-002,order_confirmed,-10,110,100,ORDER-2001,system,Order shipped
+TXN-015,2026-02-20T09:15:00Z,PROD-00004,SKU-PROD-00004-RED-M,VENDOR-002,restock,130,0,130,,VENDOR-002,Initial t-shirt stock - Red Medium
+TXN-016,2026-02-21T11:00:00Z,PROD-00004,SKU-PROD-00004-RED-M,VENDOR-002,order_confirmed,-10,130,120,ORDER-2002,system,Order shipped
+TXN-017,2026-02-20T09:20:00Z,PROD-00004,SKU-PROD-00004-RED-L,VENDOR-002,restock,100,0,100,,VENDOR-002,Initial t-shirt stock - Red Large
+TXN-018,2026-02-21T12:00:00Z,PROD-00004,SKU-PROD-00004-RED-L,VENDOR-002,order_confirmed,-10,100,90,ORDER-2003,system,Order shipped
+TXN-019,2026-02-20T09:25:00Z,PROD-00004,SKU-PROD-00004-BLU-S,VENDOR-002,restock,85,0,85,,VENDOR-002,Initial t-shirt stock - Blue Small
+TXN-020,2026-02-21T13:00:00Z,PROD-00004,SKU-PROD-00004-BLU-S,VENDOR-002,order_confirmed,-5,85,80,ORDER-2004,system,Order shipped
+TXN-021,2026-02-20T09:35:00Z,PROD-00005,SKU-PROD-00005-28,VENDOR-002,restock,50,0,50,,VENDOR-002,Initial jeans stock - Size 28
+TXN-022,2026-02-20T09:40:00Z,PROD-00005,SKU-PROD-00005-30,VENDOR-002,restock,70,0,70,,VENDOR-002,Initial jeans stock - Size 30
+TXN-023,2026-02-21T14:00:00Z,PROD-00005,SKU-PROD-00005-30,VENDOR-002,order_confirmed,-5,70,65,ORDER-2005,system,Order shipped
+TXN-024,2026-02-20T10:05:00Z,PROD-00006,SKU-PROD-00006-BLK-9,VENDOR-002,restock,45,0,45,,VENDOR-002,Initial shoe stock - Black Size 9
+TXN-025,2026-02-21T15:00:00Z,PROD-00006,SKU-PROD-00006-BLK-9,VENDOR-002,order_confirmed,-3,45,42,ORDER-2006,system,Order shipped
+TXN-026,2026-02-21T08:10:00Z,PROD-00007,SKU-PROD-00007-BLK,VENDOR-003,restock,160,0,160,,VENDOR-003,Initial water bottle stock - Black
+TXN-027,2026-02-22T10:00:00Z,PROD-00007,SKU-PROD-00007-BLK,VENDOR-003,order_confirmed,-10,160,150,ORDER-3001,system,Bulk order shipped
+TXN-028,2026-02-21T08:15:00Z,PROD-00007,SKU-PROD-00007-BLU,VENDOR-003,restock,128,0,128,,VENDOR-003,Initial water bottle stock - Blue
+TXN-029,2026-02-22T11:00:00Z,PROD-00007,SKU-PROD-00007-BLU,VENDOR-003,order_confirmed,-8,128,120,ORDER-3002,system,Order shipped
+TXN-030,2026-02-21T09:10:00Z,PROD-00008,SKU-PROD-00008-SET,VENDOR-003,restock,48,0,48,,VENDOR-003,Initial frying pan set stock
+TXN-031,2026-02-22T12:00:00Z,PROD-00008,SKU-PROD-00008-SET,VENDOR-003,order_confirmed,-3,48,45,ORDER-3003,system,Order shipped
+TXN-032,2026-02-21T10:10:00Z,PROD-00009,SKU-PROD-00009-WHT,VENDOR-003,restock,76,0,76,,VENDOR-003,Initial desk lamp stock - White
+TXN-033,2026-02-22T13:00:00Z,PROD-00009,SKU-PROD-00009-WHT,VENDOR-003,order_confirmed,-6,76,70,ORDER-3004,system,Order shipped
+TXN-034,2026-02-21T11:10:00Z,PROD-00010,SKU-PROD-00010-PUR,VENDOR-004,restock,87,0,87,,VENDOR-004,Initial yoga mat stock - Purple
+TXN-035,2026-02-22T14:00:00Z,PROD-00010,SKU-PROD-00010-PUR,VENDOR-004,order_confirmed,-7,87,80,ORDER-4001,system,Order shipped
+TXN-036,2026-02-21T11:15:00Z,PROD-00010,SKU-PROD-00010-GRN,VENDOR-004,restock,20,0,20,,VENDOR-004,Initial yoga mat stock - Green
+TXN-037,2026-02-22T15:00:00Z,PROD-00010,SKU-PROD-00010-GRN,VENDOR-004,order_confirmed,-14,20,6,ORDER-4002,system,Large order shipped - LOW STOCK ALERT
+TXN-038,2026-02-21T12:10:00Z,PROD-00011,SKU-PROD-00011-SET,VENDOR-004,restock,103,0,103,,VENDOR-004,Initial resistance bands stock
+TXN-039,2026-02-22T16:00:00Z,PROD-00011,SKU-PROD-00011-SET,VENDOR-004,order_confirmed,-8,103,95,ORDER-4003,system,Order shipped
+TXN-040,2026-02-21T13:10:00Z,PROD-00012,SKU-PROD-00012-BLU,VENDOR-004,restock,27,0,27,,VENDOR-004,Initial tent stock - Blue
+TXN-041,2026-02-22T17:00:00Z,PROD-00012,SKU-PROD-00012-BLU,VENDOR-004,order_confirmed,-2,27,25,ORDER-4004,system,Order shipped
+TXN-042,2026-02-22T08:10:00Z,PROD-00013,SKU-PROD-00013-HRD,VENDOR-005,restock,54,0,54,,VENDOR-005,Initial book stock - Hardcover
+TXN-043,2026-02-23T10:00:00Z,PROD-00013,SKU-PROD-00013-HRD,VENDOR-005,order_confirmed,-4,54,50,ORDER-5001,system,Order shipped
+TXN-044,2026-02-22T08:15:00Z,PROD-00013,SKU-PROD-00013-PPR,VENDOR-005,restock,92,0,92,,VENDOR-005,Initial book stock - Paperback
+TXN-045,2026-02-23T11:00:00Z,PROD-00013,SKU-PROD-00013-PPR,VENDOR-005,order_confirmed,-7,92,85,ORDER-5002,system,Order shipped
+TXN-046,2026-02-22T09:10:00Z,PROD-00014,SKU-PROD-00014-BOX,VENDOR-005,restock,43,0,43,,VENDOR-005,Initial novel box set stock
+TXN-047,2026-02-23T12:00:00Z,PROD-00014,SKU-PROD-00014-BOX,VENDOR-005,order_confirmed,-3,43,40,ORDER-5003,system,Order shipped
+TXN-048,2026-02-22T10:10:00Z,PROD-00015,SKU-PROD-00015-SET,VENDOR-005,restock,65,0,65,,VENDOR-005,Initial children's book set stock
+TXN-049,2026-02-23T13:00:00Z,PROD-00015,SKU-PROD-00015-SET,VENDOR-005,order_confirmed,-5,65,60,ORDER-5004,system,Order shipped
+TXN-050,2026-02-23T14:00:00Z,PROD-00001,SKU-PROD-00001-BLK,VENDOR-001,order_cancelled,0,70,70,ORDER-1005,system,Customer cancelled - stock released
